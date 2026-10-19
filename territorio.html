@@ -6,18 +6,18 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600&family=Orbitron:wght@700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap">
 <style>
 /* Tablero territorial: cada municipio frente a sus 9 vecinos. Escala divergente azul (mejor) – gris (similar) – rojo (peor);
-   el semáforo siempre lleva ícono y texto. Marca CivisLab: papel, verde, Orbitron para cifras. */
+   el semáforo siempre lleva ícono y texto. Marca CivisLab: papel, verde, Montserrat en todo. */
 :root{
   --papel:#F4F5F2; --superficie:#FFFFFF; --superficie-2:#EEF1EC; --linea:#D8DED6; --linea-2:#BFC9BE;
   --tinta:#1D2422; --tinta-2:#4C5752; --tinta-3:#65706B; --verde:#2B4B48; --acento:#2B4B48; --acento-tinta:#FFFFFF;
   --dv-2:#1c5cab; --dv-1:#86b6ef; --dv0:#ECEBE6; --dv1:#ec9a93; --dv2:#c4302f; --sin-dato:#E9EBE8; --raya:#C9C2AE;
   --st-rojo:#d03b3b; --st-ambar:#fab219; --st-verde:#0ca30c; --st-gris:#8E938F;
   --linea-serie:#C3CBC2; --resalte:#1D2422; --sello-fondo:#F6EDD6; --sello:#7E5F14;
-  --f-display:'Orbitron','Barlow',system-ui,sans-serif; --f-texto:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --f-dato:'Barlow Semi Condensed','Barlow',system-ui,sans-serif; color-scheme:light;
+  --f-display:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif; --f-texto:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-dato:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif; color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -56,7 +56,8 @@ section.bloque{margin-top:36px}
 .caja{background:var(--superficie);border:1px solid var(--linea);border-radius:14px;padding:16px}
 .resumen{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr);gap:16px;align-items:start}
 .resumen>*,.top3>*,.fila>*{min-width:0}
-label.sel{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--tinta-2)}
+label.sel{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--tinta-2);max-width:100%}
+label.sel select{max-width:100%}
 select{font:inherit;font-size:15px;color:var(--tinta);background:var(--superficie);border:1px solid var(--linea-2);border-radius:10px;padding:9px 12px;min-height:44px}
 #mapa{width:100%;height:auto;display:block}
 #mapa path.m{stroke:var(--superficie);stroke-width:1.2;cursor:pointer}
@@ -67,12 +68,12 @@ select{font:inherit;font-size:15px;color:var(--tinta);background:var(--superfici
 .ley span{display:inline-flex;align-items:center;gap:6px}
 .ley i{width:14px;height:14px;border-radius:3px;display:inline-block;border:1px solid var(--linea-2)}
 .matriz-env{overflow-x:auto}
-table.matriz{border-collapse:separate;border-spacing:2px;width:100%;min-width:640px;font-size:13px}
+table.matriz{border-collapse:separate;border-spacing:2px;width:100%;min-width:640px;font-size:12px;font-variant-numeric:tabular-nums}
 .matriz th{font-family:var(--f-dato);font-weight:600;color:var(--tinta-2);text-align:left;padding:4px 6px;vertical-align:bottom}
-.matriz thead th{font-size:12px;line-height:1.2;max-width:90px}
+.matriz thead th{font-size:11px;line-height:1.2;max-width:90px;padding:4px 3px}
 .matriz tbody th{white-space:nowrap}
 .matriz tbody th button{font:inherit;font-weight:600;color:var(--tinta);background:none;border:0;padding:4px 2px;cursor:pointer;text-align:left}
-.matriz td{border-radius:4px;text-align:center;font-family:var(--f-dato);font-weight:600;padding:8px 4px;cursor:pointer;min-width:52px}
+.matriz td{border-radius:4px;text-align:center;font-family:var(--f-dato);font-weight:600;padding:8px 2px;cursor:pointer;min-width:40px}
 .matriz td.nd{background:repeating-linear-gradient(45deg,var(--sin-dato) 0 4px,var(--raya) 4px 6px);color:var(--tinta-3);cursor:default}
 .matriz tr.sel th button{text-decoration:underline;text-underline-offset:3px}
 .matriz tr.sel td{outline:2px solid var(--tinta);outline-offset:-2px}
@@ -104,7 +105,7 @@ details.dim[open]>summary .tt::before{content:"▾ "}
 .fila:hover{background:var(--superficie-2)}
 .fila:focus-visible{outline:2px solid var(--acento);outline-offset:-2px}
 .fila .nm{font-weight:600;line-height:1.3}
-.fila .src{font-size:12.5px;color:var(--tinta-3)}
+.fila .src{font-size:12.5px;color:var(--tinta-3);overflow-wrap:anywhere}
 .fila .vv{font-family:var(--f-dato);font-weight:600;font-size:16px}
 .fila .an{font-size:12.5px;color:var(--tinta-3)}
 .fila .fl{font-size:12.5px;color:var(--tinta-3);margin-top:3px}
@@ -129,7 +130,7 @@ a{color:var(--acento)}
 footer{margin-top:36px;font-size:13px;color:var(--tinta-3)}
 @media (max-width:900px){
   .resumen{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.top3{grid-template-columns:1fr}
-  .fila{grid-template-columns:1fr;gap:6px}
+  .fila{grid-template-columns:minmax(0,1fr);gap:6px}
 }
 </style>
 
@@ -398,7 +399,7 @@ pintarMapa(); elegir(codSel);
 </script>
 
 <a href="index.html" id="volver-civislab" style="position:fixed;left:16px;bottom:16px;z-index:9999;display:inline-flex;align-items:center;gap:8px;
-padding:10px 16px;min-height:44px;border-radius:999px;background:#2B4B48;color:#fff;font:600 15px/1 'Barlow',system-ui,sans-serif;text-decoration:none;
+padding:10px 16px;min-height:44px;border-radius:999px;background:#2B4B48;color:#fff;font:600 15px/1 'Montserrat',system-ui,sans-serif;text-decoration:none;
 box-shadow:0 6px 20px rgba(0,0,0,.25)">← CivisLab</a>
 <script>if (/(^|[#&])m=/.test(location.hash)) addEventListener("load", () => { const s = document.getElementById("piloto"); if (s) s.scrollIntoView(); });</script>
 </html>

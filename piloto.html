@@ -7,9 +7,9 @@
 <meta name="description" content="Piloto de CivisLab para campañas a alcaldía: resultados oficiales 2019 y 2023 de Antioquia, escenario 2027 simulado en los 10 municipios del Valle de Aburrá y agenda de los medios comunitarios de Medellín (Pulso Territorial). Simulación ilustrativa; no es encuesta.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600&family=Orbitron:wght@600;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap">
 <style>/* Landing institucional sobre el papel claro de la marca CivisLab. El piloto vive en una
-   tarjeta verde oscura (como en el sitio actual) y las cifras van en Orbitron. */
+   tarjeta verde oscura (como en el sitio actual) y todo va en Montserrat. */
 :root{
   --papel:#F4F5F2; --superficie:#FFFFFF; --superficie-2:#EEF1EC; --superficie-3:#E5EAE3;
   --linea:#D8DED6; --linea-2:#BFC9BE;
@@ -27,9 +27,9 @@
   /* rampas del mapa de emociones */
   --seq-bajo:#E6EEE2; --seq-alto:#2B4B48; --div-neg:#B4553B; --div-cero:#ECEBE6; --div-pos:#2E6E8E;
   --sin-dato:#E9EBE8;
-  --f-display:'Orbitron','Barlow',system-ui,sans-serif;
-  --f-texto:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --f-dato:'Barlow Semi Condensed','Barlow',system-ui,sans-serif;
+  --f-display:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-texto:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-dato:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
   --r:10px; --r-s:6px;
   --ancho:1240px;
   color-scheme:light;
@@ -418,6 +418,8 @@ button.fila:hover,button.fila.activa{background:#23403B}
   .tesela .tv{font-size:12px}
   .barras div{grid-template-columns:minmax(0,110px) minmax(0,1fr) 36px}
   .leyenda-mapa{display:none}
+  .sello{font-size:11px;letter-spacing:.04em;white-space:normal;max-width:100%}
+  .piloto-barra h2{font-size:13px;letter-spacing:.06em}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -1416,7 +1418,7 @@ arrancar();
 
 
 <a href="index.html" id="volver-civislab" style="position:fixed;left:16px;bottom:16px;z-index:9999;display:inline-flex;align-items:center;gap:8px;
-padding:10px 16px;min-height:44px;border-radius:999px;background:#2B4B48;color:#fff;font:600 15px/1 'Barlow',system-ui,sans-serif;text-decoration:none;
+padding:10px 16px;min-height:44px;border-radius:999px;background:#2B4B48;color:#fff;font:600 15px/1 'Montserrat',system-ui,sans-serif;text-decoration:none;
 box-shadow:0 6px 20px rgba(0,0,0,.25)">← CivisLab</a>
 <script>if (/(^|[#&])m=/.test(location.hash)) addEventListener("load", () => { const s = document.getElementById("piloto"); if (s) s.scrollIntoView(); });</script>
 </html>
