@@ -38,9 +38,9 @@
 [hidden]{display:none!important}
 body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--f-texto);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .pagina{max-width:1200px;margin:0 auto;padding:28px 16px 56px}
-.marca{font-family:var(--f-display);font-weight:900;font-size:18px;letter-spacing:.02em;color:var(--verde)}
-:root[data-theme="dark"] .marca{color:var(--acento)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .marca{color:var(--acento)}}
+.marca{font-family:var(--f-display);font-weight:900;font-size:18px;letter-spacing:.02em;display:inline-flex;align-items:center;color:var(--tinta);text-decoration:none}
+.marca .barra{display:inline-block;width:.19em;height:.81em;background:var(--salvia,#96B483);margin:0 .1em;border-radius:0;transform:translateY(1px)}
+.marca .lab{color:var(--acento);margin-left:.28em}
 .ante{font-family:var(--f-dato);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-3);margin:18px 0 6px}
 h1{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,4vw,38px);line-height:1.15;margin:0 0 10px}
 h2{font-size:20px;margin:0 0 4px}
@@ -72,7 +72,7 @@ h2{font-size:20px;margin:0 0 4px}
 .celda .cn{font-family:var(--f-dato);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
 .celda .nm{font-weight:700;font-size:16px;line-height:1.2}
 .celda .n{font-family:var(--f-display);font-weight:700;font-size:24px}
-.celda .lbl{font-size:13px}
+.celda .lbl{font-size:13px;line-height:1.35;min-height:2.7em} /* dos líneas reservadas: la cifra queda a la misma altura en todas las teselas */
 .celda.sel{outline:2px solid var(--tinta);outline-offset:2px}
 .panel h3{font-size:19px;margin:0 0 2px}
 .panel .sub{color:var(--tinta-2);font-size:14px;margin-bottom:10px}
@@ -95,7 +95,7 @@ footer{margin-top:32px;font-size:13px;color:var(--tinta-3)}
 </style>
 
 <div class="pagina">
-  <span class="marca">CivisLab</span>
+  <span class="marca" aria-label="CivisLab">Civ<span class="barra"></span>s<span class="lab">Lab</span></span>
   <p class="ante">Pulso Territorial · escenario de escucha</p>
   <h1>Dónde se puede escuchar el territorio en Antioquia</h1>
   <p class="entrada">El Pulso lee de qué se habla en cada territorio a partir de sus medios. Esta maqueta lleva el inventario de medios comunitarios de Medellín al resto del Valle de Aburrá y al departamento, para ver dónde hay escucha posible, dónde solo hay radio y dónde no hay ningún medio mapeado.</p>

@@ -44,8 +44,9 @@ a{color:var(--acento)}
 .ancho{max-width:1200px;margin:0 auto;padding:0 16px}
 header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--papel) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
 header.top .ancho{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
-.marca{font-family:var(--f-display);font-weight:900;font-size:20px;color:var(--acento);text-decoration:none;letter-spacing:.01em}
-.marca span{color:var(--salvia)}
+.marca{font-family:var(--f-display);font-weight:900;font-size:20px;letter-spacing:.02em;display:inline-flex;align-items:center;color:var(--tinta);text-decoration:none}
+.marca .barra{display:inline-block;width:.19em;height:.81em;background:var(--salvia,#96B483);margin:0 .1em;border-radius:0;transform:translateY(1px)}
+.marca .lab{color:var(--acento);margin-left:.28em}
 nav.nav{display:flex;gap:4px;flex-wrap:wrap}
 nav.nav a{font-weight:600;font-size:15px;color:var(--tinta-2);text-decoration:none;padding:10px 12px;border-radius:8px;min-height:44px;display:inline-flex;align-items:center}
 nav.nav a:hover{background:var(--superficie-2);color:var(--tinta)}
@@ -122,7 +123,7 @@ footer{padding:28px 0 48px;font-size:13.5px;color:var(--tinta-3)}
 </style>
 
 <header class="top"><div class="ancho">
-  <a class="marca" href="#inicio">Civis<span>Lab</span></a>
+  <a class="marca" href="#inicio" aria-label="CivisLab">Civ<span class="barra"></span>s<span class="lab">Lab</span></a>
   <nav class="nav" aria-label="Secciones"><a href="#preguntas">Herramientas</a><a href="#rigor">Rigor</a><a href="#servicios">Servicios</a><a href="#contacto">Contacto</a></nav>
 </div></header>
 

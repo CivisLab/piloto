@@ -39,7 +39,9 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
 body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--f-texto);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .pagina{max-width:1240px;margin:0 auto;padding:28px 16px 64px}
-.marca{font-family:var(--f-display);font-weight:900;font-size:18px;color:var(--acento)}
+.marca{font-family:var(--f-display);font-weight:900;font-size:18px;letter-spacing:.02em;display:inline-flex;align-items:center;color:var(--tinta);text-decoration:none}
+.marca .barra{display:inline-block;width:.19em;height:.81em;background:var(--salvia,#96B483);margin:0 .1em;border-radius:0;transform:translateY(1px)}
+.marca .lab{color:var(--acento);margin-left:.28em}
 .ante{font-family:var(--f-dato);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-3);margin:18px 0 6px}
 h1{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,4vw,38px);line-height:1.15;margin:0 0 10px;max-width:24ch}
 h2{font-size:22px;margin:0 0 4px}
@@ -110,7 +112,7 @@ details.dim[open]>summary .tt::before{content:"▾ "}
 .fila .an{font-size:12.5px;color:var(--tinta-3)}
 .fila .fl{font-size:12.5px;color:var(--tinta-3);margin-top:3px}
 .fila .aviso{font-size:12.5px;color:var(--sello);margin-top:3px}
-.tira{width:100%;height:34px;display:block;overflow:visible}
+.tira{width:100%;height:44px;display:block;overflow:visible}
 .tira text{font-family:var(--f-dato);font-size:10px;fill:var(--tinta-3)}
 .panel{position:fixed;inset:auto 0 0 auto;width:min(560px,100%);max-height:88vh;overflow:auto;background:var(--superficie);border:1px solid var(--linea-2);border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.18);padding:18px 18px 24px;z-index:30}
 @media (min-width:901px){.panel{inset:16px 16px auto auto;border-radius:16px;max-height:calc(100vh - 32px)}}
@@ -135,7 +137,7 @@ footer{margin-top:36px;font-size:13px;color:var(--tinta-3)}
 </style>
 
 <div class="pagina">
-  <span class="marca">CivisLab</span>
+  <span class="marca" aria-label="CivisLab">Civ<span class="barra"></span>s<span class="lab">Lab</span></span>
   <p class="ante">Lectura territorial · Valle de Aburrá · Atlas (nombre en revisión)</p>
   <h1>Dónde está cada municipio frente a sus vecinos</h1>
   <p class="entrada">Cincuenta y cuatro indicadores oficiales de los 10 municipios del Valle de Aburrá, comparados entre sí. Cada cifra trae su fuente y su año. El color dice si el municipio está mejor o peor que la mitad del Valle; el semáforo suma si la brecha se está cerrando o abriendo.</p>
@@ -271,6 +273,23 @@ const paths = svg.append("g").selectAll("path").data(fc.features).join("path").a
 svg.append("g").selectAll("text").data(fc.features).join("text")
   .attr("x", f => ruta.centroid(f)[0]).attr("y", f => ruta.centroid(f)[1]).attr("text-anchor", "middle")
   .text(f => (MUN[f.properties.MPIO_CCNCT] || {}).n || "");
+/* Separa rótulos que se montan (municipios pequeños y vecinos, como La Estrella y Sabaneta). */
+(function separarRotulos(){
+  const ts = svg.selectAll("text").nodes();
+  for (let it = 0; it < 30; it++) {
+    let movio = false;
+    for (let i = 0; i < ts.length; i++) for (let j = i + 1; j < ts.length; j++) {
+      const a = ts[i].getBBox(), b = ts[j].getBBox();
+      const sx = Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x);
+      const sy = Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y);
+      if (sx > 0 && sy > -2) {
+        const d = (sy + 2) / 2 + .5, arriba = a.y <= b.y ? ts[i] : ts[j], abajo = arriba === ts[i] ? ts[j] : ts[i];
+        arriba.setAttribute("y", +arriba.getAttribute("y") - d); abajo.setAttribute("y", +abajo.getAttribute("y") + d); movio = true;
+      }
+    }
+    if (!movio) break;
+  }
+})();
 function valMapa(cod){ const m = MUN[cod]; if (!m) return null; return dimSel.value === "prom" ? promedio(m) : m.dims[dimSel.value]; }
 function tipMapa(cod){ const v = valMapa(cod), m = MUN[cod]; return `<b>${esc(m.n)}</b><br>${typeof v === "number" ? "Puntaje " + nb(v) + " · " + esc(bin(v).t) : "Sin indicadores en semáforo"}`; }
 function pintarMapa(){
@@ -297,13 +316,13 @@ function tira(k, cod){
   let lo = Math.min(...xs), hi = Math.max(...xs); if (lo === hi) { lo -= 1; hi += 1; }
   const med = d3.median(xs);
   const X = v => { const t = (v - lo) / (hi - lo); return 8 + (s === -1 ? 1 - t : t) * 184; };
-  const pts = vals.map(x => x.cod === cod ? "" : `<circle cx="${X(x.v).toFixed(1)}" cy="14" r="4.5" fill="var(--linea-2)" stroke="var(--superficie)" stroke-width="1.5"><title>${esc(x.n)}: ${esc(valor(k, D.val[k][x.cod]))}</title></circle>`).join("");
+  const pts = vals.map(x => x.cod === cod ? "" : `<circle cx="${X(x.v).toFixed(1)}" cy="20" r="4.5" fill="var(--linea-2)" stroke="var(--superficie)" stroke-width="1.5"><title>${esc(x.n)}: ${esc(valor(k, D.val[k][x.cod]))}</title></circle>`).join("");
   const yo = vals.find(x => x.cod === cod);
-  const mio = yo ? `<circle cx="${X(yo.v).toFixed(1)}" cy="14" r="7" fill="var(--resalte)" stroke="var(--superficie)" stroke-width="2"><title>${esc(yo.n)}: ${esc(valor(k, D.val[k][cod]))}</title></circle>` : "";
-  return `<svg class="tira" viewBox="0 0 200 34" preserveAspectRatio="none" role="img" aria-label="Posición entre los 10 municipios: a la derecha, peor">
-    <line x1="8" x2="192" y1="14" y2="14" stroke="var(--linea)" stroke-width="2"/>
-    <line x1="${X(med).toFixed(1)}" x2="${X(med).toFixed(1)}" y1="5" y2="23" stroke="var(--tinta-3)" stroke-width="1.5"/>
-    ${pts}${mio}<text x="8" y="32">mejor</text><text x="192" y="32" text-anchor="end">peor</text><text x="${X(med).toFixed(1)}" y="32" text-anchor="middle">mediana</text></svg>`;
+  const mio = yo ? `<circle cx="${X(yo.v).toFixed(1)}" cy="20" r="7" fill="var(--resalte)" stroke="var(--superficie)" stroke-width="2"><title>${esc(yo.n)}: ${esc(valor(k, D.val[k][cod]))}</title></circle>` : "";
+  return `<svg class="tira" viewBox="0 0 200 44" preserveAspectRatio="none" role="img" aria-label="Posición entre los 10 municipios: a la derecha, peor">
+    <line x1="8" x2="192" y1="20" y2="20" stroke="var(--linea)" stroke-width="2"/>
+    <line x1="${X(med).toFixed(1)}" x2="${X(med).toFixed(1)}" y1="12" y2="28" stroke="var(--tinta-3)" stroke-width="1.5"/>
+    ${pts}${mio}<text x="8" y="42">mejor</text><text x="192" y="42" text-anchor="end">peor</text><text x="${X(med).toFixed(1)}" y="8" text-anchor="${X(med) < 30 ? "start" : X(med) > 170 ? "end" : "middle"}">mediana</text></svg>`;
 }
 
 function fila(k, cod){
