@@ -88,6 +88,8 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(22px,3vw,30px);m
 .herr{margin-top:auto;display:flex;flex-direction:column;gap:8px}
 .herr a.abrir{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;min-height:48px;border-radius:12px;background:var(--superficie-2);color:var(--tinta);text-decoration:none;font-weight:600;border:1px solid var(--linea)}
 .herr a.abrir:hover{border-color:var(--acento)}
+.herr a.abrir.privado{background:var(--susc-fondo);border-color:var(--susc)}
+.herr a.abrir.privado small{color:var(--susc);font-weight:700;letter-spacing:.03em}
 .herr a.abrir small{display:block;font-weight:500;font-size:13px;color:var(--tinta-3)}
 .herr .flecha{font-size:20px;color:var(--acento)}
 .herr .pronto{padding:12px 14px;border-radius:12px;border:1px dashed var(--linea-2);color:var(--tinta-3);font-size:14.5px}
@@ -194,7 +196,8 @@ footer{padding:28px 0 48px;font-size:13.5px;color:var(--tinta-3)}
         <tr><td>Error de probabilidad (Brier, menor es mejor)</td><td class="n">0,508</td><td class="n">0,464</td></tr>
         <tr><td>Acierto en el Valle de Aburrá</td><td class="n">—</td><td class="n">29 %</td></tr></tbody></table>
       <p>El Valle es donde menos acierta, y lo decimos. La especificación para 2027 está sellada: <code>6271646c…</code></p>
-      <div class="herr"><a class="abrir" href="piloto.html#piloto"><span>Escenario 2027 simulado<small>candidaturas ficticias · no es encuesta</small></span><span class="flecha" aria-hidden="true">→</span></a></div>
+      <div class="herr"><a class="abrir" href="piloto.html#piloto"><span>Escenario 2027 simulado<small>candidaturas ficticias · no es encuesta</small></span><span class="flecha" aria-hidden="true">→</span></a>
+        </div>
     </div>
     <div class="tarjeta">
       <h3>Prueba de la escucha en Medellín</h3>
